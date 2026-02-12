@@ -1,0 +1,84 @@
+/* Page background & padding */
+.cards-page {
+  min-height: 100vh;
+  padding: 2rem;  
+  transition: background 0.3s ease;
+}
+
+.cards-page.theme-dark {
+  background-color: #1f1f1f;
+}
+
+/* Page title */
+.page-title {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: #222;
+}
+.theme-dark .page-title {
+  color: #fff;
+}
+
+/* Grid layout: all cards same size */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Individual card: fixed aspect ratio */
+.card {
+  background-color: #fff;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+  height: 200px; /* fixed height for uniformity */
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+}
+
+.theme-dark .card {
+  background-color: #2b2b2b;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
+
+/* Card title & description */
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.card-desc {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.theme-dark .card-desc {
+  color: #ccc;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .cards-grid {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
+}

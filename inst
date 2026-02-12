@@ -1,0 +1,4 @@
+
+npm i @types/react-router-dom
+npm i react-icons
+npm install tailwindcss @tailwindcss/vite

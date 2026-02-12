@@ -1,0 +1,71 @@
+/* Mobile View CSS - Targets screens up to 768px */
+@media screen and (max-width: 768px) {
+  
+  /* Change grid to single column on mobile */
+  .banner-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 2rem !important;
+  }
+
+  /* Center image on mobile */
+  .banner-image-wrapper {
+    justify-content: center !important;
+    width: 100% !important;
+  }
+
+  /* Smaller image size for mobile */
+  .banner-image {
+    width: 160px !important;
+    height: auto !important;
+  }
+
+  /* Center text content on mobile */
+  .banner-content {
+    text-align: center !important;
+  }
+  
+  .banner-content .space-y-6 {
+    margin-top: 1rem !important;
+  }
+
+  /* Smaller title for mobile */
+  .banner-title {
+    font-size: 1.875rem !important; /* 30px */
+    line-height: 1.2 !important;
+  }
+
+  /* Smaller description for mobile */
+  .banner-description {
+    font-size: 0.875rem !important; /* 14px */
+    line-height: 1.5 !important;
+  }
+}
+
+/* Extra small devices (phones, 480px and down) */
+@media screen and (max-width: 480px) {
+  
+  .banner-image {
+    width: 140px !important;
+  }
+  
+  .banner-title {
+    font-size: 1.5rem !important; /* 24px */
+  }
+  
+  .banner-description {
+    font-size: 0.75rem !important; /* 12px */
+  }
+}
+
+/* Tablet devices (769px to 1024px) */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  
+  .banner-image {
+    width: 200px !important;
+  }
+  
+  .banner-title {
+    font-size: 2.25rem !important; /* 36px */
+  }
+}
