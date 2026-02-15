@@ -1,23 +1,28 @@
-import { useState, useEffect } from 'react'
-import Access_Token,{Api_Key, movie} from './assets/config/keys'   // make sure this is correct
 
+
+import { BrowserRouter as Router,Routes,Route } from 'react-router-dom'
 import './App.css'
 
-import CardsGrid from './assets/pages/CardGrid'
-import BannerCard from './assets/pages/BannerCard'  
+
 import VideoPage from './assets/pages/VideoPage'
+import HomePage from './assets/pages/HomePage'
 
 function App() {
 
-  const [data, setData] = useState(null)
+
 
 
   return (
-    <>
-      <VideoPage />
-       <BannerCard />
-      <CardsGrid data={data} /> 
-    </>
+ <Router>
+    <Routes>
+      <Route path="/" element={<HomePage/>} />
+      <Route path="video/:id" element={<VideoPage/>}/>
+
+
+  
+      
+    </Routes>
+ </Router>
   )
 }
 

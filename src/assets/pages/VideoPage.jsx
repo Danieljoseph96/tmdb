@@ -1,53 +1,81 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Navbar from "./Navbar";
+import { useParams } from "react-router-dom";
+import Access_Token, { Api_Key, movie } from "../config/keys";
 
 export default function VideoPage() {
-  const videoRef = useRef(null);
+  const { id } = useParams();
+  const iframeRef = useRef(null);
+  const [videoKey, setVideoKey] = useState(null);
+
+  useEffect(() => {
+    const fetchTrailer = async () => {
+      try {
+        const response = await fetch(
+          `${movie}/${id}/videos?api_key=${Api_Key}`,
+          {
+            method: "GET",
+            headers: {
+              accept: "application/json",
+              Authorization: `Bearer ${Access_Token}`,
+            },
+          }
+        );
+
+        const data = await response.json();
+
+        if (data.results && data.results.length > 0) {
+          const trailer =
+            data.results.find((vid) => vid.type === "Trailer") ||
+            data.results[0];
+
+          setVideoKey(trailer.key);
+        }
+      } catch (error) {
+        console.error("Error fetching trailer:", error);
+      }
+    };
+
+    fetchTrailer();
+  }, [id]);
 
   const handleFullscreen = () => {
-    if (videoRef.current.requestFullscreen) {
-      videoRef.current.requestFullscreen();
-    } else if (videoRef.current.webkitRequestFullscreen) {
-      videoRef.current.webkitRequestFullscreen();
-    } else if (videoRef.current.msRequestFullscreen) {
-      videoRef.current.msRequestFullscreen();
+    if (iframeRef.current?.requestFullscreen) {
+      iframeRef.current.requestFullscreen();
     }
   };
 
-  const handleHover = () => {
-    console.log("Hovering over navbar");
-  };
+  if (!videoKey) {
+    return (
+      <div className="min-h-screen bg-black flex items-center justify-center text-white">
+        Loading Trailer...
+      </div>
+    );
+  }
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-b from-black/30 to-black/30 flex flex-col py-0 px-0 m-0 ">
-      
-      {/* Navbar at top with hover handler */}
-      <div onMouseEnter={handleHover} className="w-full">
-        <Navbar />
-      </div>
+    <div className="min-h-screen w-full bg-black text-white flex flex-col">
+      <Navbar />
 
-      {/* Video container - centered */}
-      <div className="flex-1 flex items-center justify-center">
-        <div className="w-full max-w-4xl px-4 py-8">
-          <video
-            ref={videoRef}
-            className="w-full rounded-xl shadow-2xl"
-            controls
-            preload="metadata"
-          >
-            <source src="/your-video.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
+      <div className="flex-1 flex items-center justify-center px-4">
+        <div className="w-full max-w-5xl">
+          <iframe
+            ref={iframeRef}
+            className="w-full h-[70vh] rounded-xl shadow-2xl"
+            src={`https://www.youtube.com/embed/${videoKey}?autoplay=1`}
+            title="Movie Trailer"
+            allow="autoplay; fullscreen"
+            allowFullScreen
+          ></iframe>
 
           <button
             onClick={handleFullscreen}
-            className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+            className="mt-4 px-6 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition"
           >
             Full Screen
           </button>
         </div>
       </div>
-      
     </div>
   );
 }
