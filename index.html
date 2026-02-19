@@ -2,9 +2,18 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/tmdb/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>tmdb</title>
+    <title>TMDB Clone</title>
+    <script>
+      // Fix for GitHub Pages - redirect to hash-based routing
+      (function() {
+        const redirect = sessionStorage.redirect;
+        delete sessionStorage.redirect;
+        if (redirect && redirect !== window.location.href) {
+          history.replaceState(null, null, redirect);
+        }
+      })();
+    </script>
     <script type="module" crossorigin src="/tmdb/assets/index-DHGAXK9l.js"></script>
     <link rel="stylesheet" crossorigin href="/tmdb/assets/index-D471WJPp.css">
   </head>
