@@ -18,11 +18,11 @@ function Loader() {
 
 function App() {
   return (
-    <Router>
+    <Router >
       <Suspense fallback={<Loader />}>
         <Routes>
-          <Route path="" element={<HomePage />} />
-          <Route path="video/:id" element={<VideoPage />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/video/:id" element={<VideoPage />} />
         </Routes>
       </Suspense>
     </Router>
